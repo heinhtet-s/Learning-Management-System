@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+ 
 import { Request } from 'express'
 import { THttpError } from '../types/types'
 import responseMessage from '../constant/responseMessage'
@@ -29,7 +29,7 @@ export default (
     }
 
     // Log
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+     
     logger.error(`CONTROLLER_ERROR`, {
         meta: errorObj
     })
