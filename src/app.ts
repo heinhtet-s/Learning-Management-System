@@ -20,7 +20,12 @@ app.use(
 )
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '../', 'public')))
-
+app.get('/test', (_, res: Response) => {
+    res.status(200).json({
+        succcess: true,
+        message: 'API is working'
+    })
+})
 // Routes
 app.use('/api/v1', router)
 
@@ -37,4 +42,3 @@ app.use((req: Request, _: Response, next: NextFunction) => {
 app.use(globalErrorHandler)
 
 export default app
-

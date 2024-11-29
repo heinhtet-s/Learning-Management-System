@@ -20,6 +20,12 @@ export default tseslint.config({
     rules: {
         'no-console': 'error',
         'no-useless-catch': 0,
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
         quotes: ['error', 'single', { allowTemplateLiterals: true }]
     }
 })
+
