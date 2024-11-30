@@ -6,6 +6,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import httpError from './utils/httpError'
 import router from './route/apiRouter'
+import userRouter from './route/user.route'
 
 const app: Application = express()
 
@@ -27,7 +28,7 @@ app.get('/test', (_, res: Response) => {
     })
 })
 // Routes
-app.use('/api/v1', router)
+app.use('/api/v1', router, userRouter)
 
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction) => {
