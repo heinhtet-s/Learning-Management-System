@@ -5,8 +5,9 @@ import responseMessage from './constant/responseMessage'
 import helmet from 'helmet'
 import cors from 'cors'
 import httpError from './utils/httpError'
-import router from './route/apiRouter'
 import userRouter from './route/user.route'
+import courseRouter from './route/course.route'
+import logger from './utils/logger'
 
 const app: Application = express()
 
@@ -15,7 +16,7 @@ app.use(helmet())
 app.use(
     cors({
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
-        origin: ['*', 'https://client.com'],
+        origin: '*',
         credentials: true
     })
 )
@@ -28,11 +29,12 @@ app.get('/test', (_, res: Response) => {
     })
 })
 // Routes
-app.use('/api/v1', router, userRouter)
+app.use('/api/v1', userRouter, courseRouter)
 
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction) => {
     try {
+        logger.warn('dd')
         throw new Error(responseMessage.NOT_FOUND('route'))
     } catch (err) {
         httpError(next, err, req, 404)

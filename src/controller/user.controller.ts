@@ -14,6 +14,7 @@ import {
     getUserById,
     updateUserRoleService
 } from '../service/user.service'
+import config from '../config/config'
 // import cloudinary from 'cloudinary'
 
 // register user
@@ -28,7 +29,6 @@ export const registrationUser = CatchAsyncError(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { name, email, password } = req.body
-
             const isEmailExist = await userModel.findOne({ email })
             if (isEmailExist) {
                 return next(new ErrorHandler('Email already exist', 400))
@@ -75,13 +75,12 @@ interface IActivationToken {
 
 export const createActivationToken = (user: any): IActivationToken => {
     const activationCode = Math.floor(1000 + Math.random() * 9000).toString()
-
     const token = jwt.sign(
         {
             user,
             activationCode
         },
-        process.env.ACTIVATION_SECRET as Secret,
+        config.ACTIVATION_SECRET as Secret,
         {
             expiresIn: '5m'
         }
@@ -186,7 +185,7 @@ export const logoutUser = CatchAsyncError(
 
 // update access token
 export const updateAccessToken = CatchAsyncError(
-    async (req: Request, res: Response, next: NextFunction) => {
+    async (req: Request, _: Response, next: NextFunction) => {
         try {
             const refresh_token = req.headers['refresh-token'] as string
             const decoded = jwt.verify(
@@ -401,7 +400,7 @@ export const updateProfilePicture = CatchAsyncError(
 
 // get all users --- only for admin
 export const getAllUsers = CatchAsyncError(
-    async (req: Request, res: Response, next: NextFunction) => {
+    async (_: Request, res: Response, next: NextFunction) => {
         try {
             await getAllUsersService(res)
         } catch (error: any) {

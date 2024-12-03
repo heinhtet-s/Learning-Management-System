@@ -11,5 +11,11 @@ export default {
     REFRESH_TOKEN: process.env.REFRESH_TOKEN,
     // Database
     DATABASE_URL: process.env.DATABASE_URL,
-    REDIS_URL: process.env.REDIS_URL
+    REDIS_URL: process.env.REDIS_URL,
+    ACTIVATION_SECRET: process.env.ACTIVATION_SECRET,
+    SMTP_HOST: process.env.SMTP_HOST,
+    SMTP_PORT: process.env.SMTP_PORT,
+    SMTP_SERVICE: process.env.SMTP_SERVICE,
+    SMTP_MAIL: process.env.SMTP_MAIL,
+    SMTP_PASSWORD: process.env.SMTP_PASSWORD
 }

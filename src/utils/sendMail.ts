@@ -1,6 +1,7 @@
 import nodemailer, { Transporter } from 'nodemailer'
 import ejs from 'ejs'
 import path from 'path'
+import config from '../config/config'
 
 interface EmailOptions {
     email: string
@@ -11,13 +12,14 @@ interface EmailOptions {
 }
 
 const sendMail = async (options: EmailOptions): Promise<void> => {
+    console.log(config)
     const transporter: Transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        service: process.env.SMTP_SERVICE,
+        host: config.SMTP_HOST,
+        port: parseInt(config.SMTP_PORT || '587'),
+        service: config.SMTP_SERVICE,
         auth: {
-            user: process.env.SMTP_MAIL,
-            pass: process.env.SMTP_PASSWORD
+            user: config.SMTP_MAIL,
+            pass: config.SMTP_PASSWORD
         }
     })
 
